@@ -1,0 +1,33 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "f47f679cee8ff631c8386087662f0550"
+name = "ip-216-app"
+handle = "ip-216-app"
+application_url = "https://collect-bases-helpful-brokers.trycloudflare.com"
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "checkout-ui-extensions-test-store.myshopify.com"
+include_config_on_deploy = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = [
+  "https://collect-bases-helpful-brokers.trycloudflare.com/auth/callback",
+  "https://collect-bases-helpful-brokers.trycloudflare.com/auth/shopify/callback",
+  "https://collect-bases-helpful-brokers.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-07"
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  uri = "/webhooks"
+
+[pos]
+embedded = false
