@@ -20,7 +20,7 @@ export default reactExtension("purchase.checkout.block.render", () => (
 async function checkTag(email, tag) {
   try {
     const response = await fetch(
-      "https://dealt-appliances-youth-standing.trycloudflare.com/check-tag",
+      "https://employee-jp-sectors-foo.trycloudflare.com/check-tag",
       {
         method: "POST",
         headers: {
