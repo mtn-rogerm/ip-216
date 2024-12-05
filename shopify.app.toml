@@ -3,7 +3,7 @@
 client_id = "f47f679cee8ff631c8386087662f0550"
 name = "ip-216-app"
 handle = "ip-216-app"
-application_url = "https://collect-bases-helpful-brokers.trycloudflare.com"
+application_url = "https://dealt-appliances-youth-standing.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://collect-bases-helpful-brokers.trycloudflare.com/auth/callback",
-  "https://collect-bases-helpful-brokers.trycloudflare.com/auth/shopify/callback",
-  "https://collect-bases-helpful-brokers.trycloudflare.com/api/auth/callback"
+  "https://dealt-appliances-youth-standing.trycloudflare.com/auth/callback",
+  "https://dealt-appliances-youth-standing.trycloudflare.com/auth/shopify/callback",
+  "https://dealt-appliances-youth-standing.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
@@ -28,6 +28,7 @@ api_version = "2024-07"
   [[webhooks.subscriptions]]
   topics = [ "app/uninstalled" ]
   uri = "/webhooks"
+  compliance_topics = [ "customers/data_request", "customers/redact", "shop/redact" ]
 
 [pos]
 embedded = false

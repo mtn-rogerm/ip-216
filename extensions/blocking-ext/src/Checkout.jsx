@@ -1,11 +1,8 @@
 import {
   reactExtension,
-  Banner,
-  useInstructions,
-  useTranslate,
-  useExtensionCapability,
   useBuyerJourneyIntercept,
-  useCartLines
+  useCartLines,
+  useApi
 } from "@shopify/ui-extensions-react/checkout";
 
 export default reactExtension("purchase.checkout.block.render", () => (
@@ -13,17 +10,15 @@ export default reactExtension("purchase.checkout.block.render", () => (
 ));
 
 function Extension() {
-  const translate = useTranslate();
-  const instructions = useInstructions();
   const lines = useCartLines();
   const total = lines.reduce((acc, item) => {
     return acc += item.cost.totalAmount.amount * item.quantity;
   }, 0);
+  const { extension } = useApi();
+  const capabilities = extension.capabilities;
+  const canBlockProgress = capabilities.current.find(capability => capability === 'block_progress');
 
-  const canBlockProgress = useExtensionCapability("block_progress");
-
-  useBuyerJourneyIntercept(({ canBlockProgress }) => {
-
+  useBuyerJourneyIntercept(() => {
     if (canBlockProgress && total < 500) {
       return {
         behavior: "block",
@@ -42,12 +37,4 @@ function Extension() {
       perform: () => {},
     };
   });
-
-  if (!instructions.attributes.canUpdateAttributes) {
-    return (
-      <Banner title="blocking-ext" status="warning">
-        {translate("attributeChangesAreNotSupported")}
-      </Banner>
-    );
-  };
 };
