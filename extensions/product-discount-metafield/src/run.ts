@@ -32,40 +32,49 @@ export function run(input: RunInput): FunctionRunResult {
    * }}
    */
 
-  const targets = input.cart.lines
+  const cartLines = input.cart.lines
     .filter((line) => {
       if (line.merchandise.__typename == 'ProductVariant') {
-        const variantMetafieldValue = line.merchandise?.product?.metafield?.value;
+        const variantMetafieldValue = line.merchandise?.metafield?.value;
         return variantMetafieldValue;
       }
     })
     .map((line) => {
       return /** @type {Target} */ ({
         cartLine: {
-          id: line.id,
+          id: line.merchandise.__typename == 'ProductVariant' ? line.merchandise?.id : false,
+          quantity: line.quantity,
         },
         discount: {
-          value: line.merchandise.__typename == 'ProductVariant' && line.merchandise?.product?.metafield?.value.toString()
+          value: line.merchandise.__typename == 'ProductVariant' && line.merchandise?.metafield?.value.toString()
         }
       });
     });
 
-  if (!targets.length) {
+  if (!cartLines.length) {
     console.error("No cart lines qualify for volume discount.");
     return EMPTY_DISCOUNT;
   }
 
   return {
-    discounts: [
-      {
-        targets,
+    discounts: cartLines.map(line => {
+      return {
         value: {
-          percentage: {
-            value: configuration.percentage.toString(),
-          },
+          fixedAmount: {
+            amount: line.discount.value
+          }
         },
-      },
-    ],
-    discountApplicationStrategy: DiscountApplicationStrategy.First,
+        targets: [
+          {
+            productVariant: {
+              id: line.cartLine.id,
+              quantity: line.cartLine.quantity
+            }
+          }
+        ],
+        message: `$${line.discount.value} off`
+      }
+    }),
+    discountApplicationStrategy: DiscountApplicationStrategy.All
   };
 }

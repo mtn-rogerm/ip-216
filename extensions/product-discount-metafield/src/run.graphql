@@ -8,11 +8,8 @@ query RunInput {
         ... on ProductVariant {
           id
           title
-          product {
-            title
-            metafield(namespace: "custom", key: "discount") {
-              value
-            }
+          metafield(namespace: "custom", key: "discount") {
+            value
           }
         }
       }

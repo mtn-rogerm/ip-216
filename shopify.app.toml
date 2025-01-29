@@ -3,7 +3,7 @@
 client_id = "f47f679cee8ff631c8386087662f0550"
 name = "ip-216-app"
 handle = "ip-216-app"
-application_url = "https://dj-expansion-jacksonville-adsl.trycloudflare.com"
+application_url = "https://lender-convention-mode-ml.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "read_products,write_discounts,write_discounts_allocator_functions,writ
 
 [auth]
 redirect_urls = [
-  "https://dj-expansion-jacksonville-adsl.trycloudflare.com/auth/callback",
-  "https://dj-expansion-jacksonville-adsl.trycloudflare.com/auth/shopify/callback",
-  "https://dj-expansion-jacksonville-adsl.trycloudflare.com/api/auth/callback"
+  "https://lender-convention-mode-ml.trycloudflare.com/auth/callback",
+  "https://lender-convention-mode-ml.trycloudflare.com/auth/shopify/callback",
+  "https://lender-convention-mode-ml.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
